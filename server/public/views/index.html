@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="heroApp" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Super Hero Collector</title>
+
+    <!-- Libraries -->
+    <script src="vendors/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom -->
+    <script src="assets/scripts/client.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    
+  </head>
+  <body class="container" ng-controller="HeroController as hc">
+    <div class="heroInput col-md-6">
+      <h2>Add Record</h2>
+      <form class="well">
+        Alias: <input class="form-control" type="text" ng-model="hc.hero.alias" />
+        First Name: <input class="form-control" type="text" ng-model="hc.hero.firstName" />
+        Last Name: <input class="form-control" type="text" ng-model="hc.hero.lastName" />
+        City: <input class="form-control" type="text" ng-model="hc.hero.city" />
+        Power: <select class="form-control" ng-options="power for power in hc.powers" ng-model="hc.hero.power" ></select>
+        <input type="submit" class="btn btn-success" ng-click="hc.addHero()"/>
+      </form>
+    </div>
+    <div class="heroContainer col-md-6">
+      <h2>Current Records</h2>
+      <div class="well" ng-repeat="hero in hc.heroes">
+        <p>
+          Alias: {{hero.alias}}
+        </p>
+        <p>
+          Name: {{hero.firstName}} {{hero.lastName}}
+        </p>
+        <p>
+          City: {{hero.city}}
+        </p>
+        <p>
+          Power: {{hero.power}}
+        </p>
+        <button class="btn btn-danger" ng-click="hc.removeHero(hero._id)">Destroy Record</button>
+      </div>
+    </div>
+  </body>
+</html>
